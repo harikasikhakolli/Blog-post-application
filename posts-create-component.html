@@ -1,0 +1,24 @@
+<!--
+  <textarea rows="6" [value]="'Enter Text'" #postInput></textarea>
+  [value] is known as property binding
+  <hr>
+  <button (click)="onClickButtonSavePost(postInput)">Save Post</button>
+   (click) is the event listener
+  <p>{{newPost}}</p>
+  <!-- {{ is string interpolation}}
+-->
+<!-- Two way binding using ngModel-->
+<mat-card>
+  <form (submit)="onClickButtonSavePost(postForm)" #postForm="ngForm"> <!-- postForm can be any name. ngForm tells angular that return a form object. that object is saved in postForm and is also passed to on submit function as parameter -->
+      <mat-form-field>
+          <input matInput type="text" name="titleInput" #titleLocalRef="ngModel" required minlength="3" ngModel placeholder="Enter the Title"> <!--required is HTML 5 attribute. Also like above ngForm gives back entire form object the ngModel here gives object of that particular input tag-->
+          <mat-error *ngIf="titleLocalRef.invalid">Please Enter a Post Title</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput rows="4" name="contentInput" #contentLocalRef="ngModel" required ngModel placeholder="Enter the Content"></textarea>
+          <mat-error *ngIf="contentLocalRef.invalid">Please Enter Content</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color='primary'>Save Post</button>
+  </form>
+
+</mat-card>
